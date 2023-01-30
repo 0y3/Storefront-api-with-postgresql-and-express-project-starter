@@ -9,34 +9,159 @@ This repo contains a basic Node and Express app to get you started in constructi
 Your application must make use of the following libraries:
 
 - Postgres for the database
-- Node/Express for the application logic
-- dotenv from npm for managing environment variables
-- db-migrate from npm for migrations
-- jsonwebtoken from npm for working with JWTs
-- jasmine from npm for testing
 
-## Steps to Completion
+## Steps to Run Local
 
-### 1. Plan to Meet Requirements
+### 1. Setup DB and Server Instructions
 
-In this repo there is a `REQUIREMENTS.md` document which outlines what this API needs to supply for the frontend, as well as the agreed upon data shapes to be passed between front and backend. This is much like a document you might come across in real life when building or extending an API.
+Create a db in your postgres
+**DB name:**`postgres` ,
+**Username:**`postgres` ,
+**password:**`mysecretpassword` .
 
-Your first task is to read the requirements and update the document with the following:
 
-- Determine the RESTful route for each endpoint listed. Add the RESTful route and HTTP verb to the document so that the frontend developer can begin to build their fetch requests.  
+### 2. Package installation instructions
+
+
+- Clone the project
+
+```bash
+  git clone https://github.com/0y3/Storefront-api-with-postgresql-and-express-project-starter.git
+```  
   **Example**: A SHOW route: 'blogs/:id' [GET]
 
-- Design the Postgres database tables based off the data shape requirements. Add to the requirements document the database tables and columns being sure to mark foreign keys.  
-  **Example**: You can format this however you like but these types of information should be provided
-  Table: Books (id:varchar, title:varchar, author:varchar, published_year:varchar, publisher_id:string[foreign key to publishers table], pages:number)
+- Go to the project directory
 
-**NOTE** It is important to remember that there might not be a one to one ratio between data shapes and database tables. Data shapes only outline the structure of objects being passed between frontend and API, the database may need multiple tables to store a single shape.
+```bash
+  cd Storefront-api-with-postgresql-and-express-project-starter folder
+```
 
-### 2. DB Creation and Migrations
+- Install dependency
 
-Now that you have the structure of the databse outlined, it is time to create the database and migrations. Add the npm packages dotenv and db-migrate that we used in the course and setup your Postgres database. If you get stuck, you can always revisit the database lesson for a reminder.
+```bash
+  npm install
+```
 
-You must also ensure that any sensitive information is hashed with bcrypt. If any passwords are found in plain text in your application it will not pass.
+- Create a new Files name `.env` inside the Storefront-api-with-postgresql-and-express-project-starter folder.
+
+-  add data below to `.env` 
+
+```bash
+  ENV = 'production'
+  PORT = 2130
+  POSTGRES_HOST = 127.0.0.1
+  POSTGRES_PORT = 5432
+  POSTGRES_DB = postgres
+  POSTGRES_USER = postgres
+  POSTGRES_PWD = mysecretpassword
+```
+
+- Build DB Migration to project 
+
+```bash
+  npm run migrate_up_all
+```
+
+- Build the server
+
+```bash
+  npm run build
+```
+
+- Start the server
+
+```bash
+  npm run start:dev
+```
+
+**NOTE** token is generated and display in your browser or ide console 
+
+<!-- Api Endpoint  -->
+
+## Api Endpoint 
+
+## API Endpoints
+
+#### Products
+
+ - [GET REQUEST] Index
+```dash
+http://localhost:2130/api/product
+```
+
+- [GET REQUEST] Show [Required args: `{id}` eg 1]
+```dash
+http://localhost:2130/api/product/{id}
+```
+
+- Create [POST requests] [token required]  (Required args: `name` ,`price` & `category`)
+
+```dash
+http://localhost:2130/api/product/?name=Eyeshadow &price=300&category=Beauty %26 Health
+```
+
+- [GET REQUEST]  Top 5 most popular products
+```dash
+http://localhost:2130/api/product/getcategory/top
+```
+
+- [GET REQUEST]  Products by category (Required args: `{categoryname}` eg Eyeshadow)
+```dash
+http://localhost:2130/api/product/category/{categoryname}
+```
+
+
+
+#### Users
+
+- [GET REQUEST]  Index [token required]
+```dash
+http://localhost:2130/api/user
+```
+
+- [GET REQUEST]  Show [token required]
+```dash
+http://localhost:2130/api/user
+```
+
+- [POST REQUEST] Create [token required] (Required args: `firstName` ,`firstName` & `password`)
+```dash
+http://localhost:2130/api/user?firstName=nameless&lastName=nameless lass&password=admin2
+```
+
+#### Orders
+
+ - [GET REQUEST] Index
+```dash
+http://localhost:2130/api/order
+```
+
+- [POST REQUEST] Create (Required args: `user_id` ,`product_id`, `quantity` & `status`)
+**NOTE** `status` can either be `active` or `inactive`
+```dash
+http://localhost:2130/api/order/?user_id=1&product_id=3&quantity=3&status=active
+``` 
+
+- [GET REQUEST] Current Order by user (Required args: `{user_id}` eg 1)[token required]
+```dash
+http://localhost:2130/api/user/{user_id}
+```
+
+- [GET REQUEST] Completed Orders by user (Required args: `{user_id}` eg 1)[token required]
+```dash
+http://localhost:2130/api/order/user/{user_id}/completeorder
+```
+
+
+<!-- Contact -->
+
+## Contact
+
+Name - Oy3 Wilson
+
+Email - trivin98@gmail.com
+
+Project Link: [https://github.com/0y3/Storefront-api-with-postgresql-and-express-project-starter](https://github.com/0y3/Storefront-api-with-postgresql-and-express-project-starter)
 
 ### 3. Models
 
