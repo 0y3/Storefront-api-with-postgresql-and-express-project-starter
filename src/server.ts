@@ -9,7 +9,7 @@ dotenv.config();
 
 const app: express.Application = express();
 const port = process.env.PORT ?? 2130;
-const address = process.env.HOST;
+const address = process.env.HOST ?? "localhost";
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
