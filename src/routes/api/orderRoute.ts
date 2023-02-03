@@ -17,6 +17,12 @@ orderroute.get(
 	UController.currentOrder,
 );
 
+orderroute.get(
+	"/orderproduct/:id/",
+	Auth.authorize(["getReq"]),
+	UController.OrderProduct,
+);
+
 orderroute.post("/", Auth.authorize(["addReq"]), UController.create);
 orderroute.get("/", Auth.authorize(["getReq"]), UController.index);
 

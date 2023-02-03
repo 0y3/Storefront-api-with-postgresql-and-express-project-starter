@@ -136,10 +136,33 @@ http://localhost:2130/api/user?firstName=nameless&lastName=nameless lass&passwor
 http://localhost:2130/api/order
 ```
 
-- [POST REQUEST] Create (Required args: `user_id` ,`product_id`, `quantity` & `status`)
+- [POST REQUEST] Create (Required args: `JSON Format`)
+`example
+{
+  "user_id":1,
+  "total": 6000,
+  "status":"complete",
+  "products":[
+      {
+        "product_id":1,
+        "quantity": 2,
+        "total_price": 2000
+      },
+       {
+        "product_id":2,
+        "quantity": 1,
+        "total_price": 1000
+      },
+       {
+        "product_id":1,
+        "quantity": 3,
+        "total_price": 3000
+      }
+    ]
+}`
 **NOTE** `status` can either be `active` or `inactive`
 ```dash
-http://localhost:2130/api/order/?user_id=1&product_id=3&quantity=3&status=active
+http://localhost:2130/api/order/
 ``` 
 
 - [GET REQUEST] Current Order by user (Required args: `{user_id}` eg 1)[token required]
@@ -150,6 +173,11 @@ http://localhost:2130/api/user/{user_id}
 - [GET REQUEST] Completed Orders by user (Required args: `{user_id}` eg 1)[token required]
 ```dash
 http://localhost:2130/api/order/user/{user_id}/completeorder
+```
+
+- [GET REQUEST] Completed Orders and Product Details by Order Id (Required args: `{order_id}` eg 1)[token required]
+```dash
+http://localhost:2130/api/order/orderproduct/{order_id}
 ```
 
 
