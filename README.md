@@ -137,7 +137,12 @@ http://localhost:2130/api/order
 ```
 
 - [POST REQUEST] Create (Required args: `JSON Format`)
-`example
+**NOTE** `status` can either be `active` or `inactive`
+```dash
+http://localhost:2130/api/order/
+``` 
+**Json Format Example**
+```dash
 {
   "user_id":1,
   "total": 6000,
@@ -158,12 +163,10 @@ http://localhost:2130/api/order
         "quantity": 3,
         "total_price": 3000
       }
+      ....
     ]
-}`
-**NOTE** `status` can either be `active` or `inactive`
-```dash
-http://localhost:2130/api/order/
-``` 
+}
+```
 
 - [GET REQUEST] Current Order by user (Required args: `{user_id}` eg 1)[token required]
 ```dash
