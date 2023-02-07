@@ -1,0 +1,16 @@
+{
+	"dev": {
+		"driver": "pg",
+		"host": "127.0.0.1",
+		"database": "alx_store_db",
+		"user": "postgres",
+		"password": "mysecretpassword"
+	},
+	"test": {
+		"driver": "pg",
+		"host": "127.0.0.1",
+		"database": "alx_store_db_test",
+		"user": "postgres",
+		"password": "mysecretpassword"
+	}
+}
